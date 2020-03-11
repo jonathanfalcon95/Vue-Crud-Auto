@@ -11,7 +11,7 @@
     >
       <template v-slot:after-heading>
         <div class="display-2 font-weight-light">
-          {{ $t('users.title') }}
+          {{ title }}
         </div>
       </template>
 
@@ -19,7 +19,7 @@
         v-model="search"
         append-icon="mdi-magnify"
         class="ml-auto"
-        label="Search"
+        :label="searchLabel"
         hide-details
         single-line
         style="max-width: 250px;"
@@ -104,12 +104,13 @@
 <script>
   import { getUsers } from '@/api/modules'
   import i18n from '@/i18n'
-
+  import userjson from "./user.json";
   export default {
     name: 'DashboardDataTables',
 
     data: () => ({
       hidden: false,
+      title: userjson.title,
       headers: [
         {
           text: i18n.t('users.id'),
@@ -142,8 +143,17 @@
             phone_number: '2323232323',
           },
         },
+        {
+          person: {
+            id: 1,
+            fullname: 'algo',
+            email: 'este@gmail.com',
+            phone_number: '2323232323',
+          },
+        },
       ],
       search: undefined,
+      searchLabel: "undefined",
     }),
     async mounted () {
       // window.getApp.$emit("SHOW_ERROR", "34534535")

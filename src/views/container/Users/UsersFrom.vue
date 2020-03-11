@@ -1,27 +1,15 @@
 <template>
-  <v-container
-    id="user-profile"
-    fluid
-    tag="section"
-  >
+  <v-container id="user-profile" fluid tag="section">
     <v-row justify="center">
       <base-material-card icon="mdi-account-outline">
         <template v-slot:heading>
-          <v-tabs
-            v-model="tabs"
-            background-color="transparent"
-            slider-color="white"
-          >
+          <v-tabs v-model="tabs" background-color="transparent" slider-color="white">
             <v-tab class="mr-3">
-              <v-icon class="mr-2">
-                mdi-account
-              </v-icon>
+              <v-icon class="mr-2">mdi-account</v-icon>
               {{ getTitleButton }}
             </v-tab>
             <v-tab class="mr-3">
-              <v-icon class="mr-2">
-                mdi-code-tags
-              </v-icon>
+              <v-icon class="mr-2">mdi-code-tags</v-icon>
               {{ $t('users.role') }}
             </v-tab>
           </v-tabs>
@@ -29,24 +17,12 @@
 
         <v-card-text style="height: 100px; position: relative">
           <v-fab-transition>
-            <v-btn
-              fab
-              dark
-              small
-              color="secondary"
-              absolute
-              right
-              top
-              @click="$router.go(-1)"
-            >
+            <v-btn fab dark small color="secondary" absolute right top @click="$router.go(-1)">
               <v-icon>mdi-arrow-left</v-icon>
             </v-btn>
           </v-fab-transition>
         </v-card-text>
-        <v-tabs-items
-          v-model="tabs"
-          class="transparent"
-        >
+        <v-tabs-items v-model="tabs" class="transparent">
           <v-tab-item :kei="0">
             <v-form>
               <v-container class="py-0">
@@ -58,12 +34,19 @@
                     md="6"
                   >
                     <v-text-field
+                      v-if="item.type!='select'"
                       v-model="userData.person[`${item.name}`]"
                       class="purple-input"
                       :label="item.name"
                       :type="item.type"
                       :disabled="option===2?true:false"
                     />
+                    <v-select
+                      v-if="item.type=='select'"
+                      :items="selectData"
+                      filled
+                      :label="item.name"
+                    ></v-select>
                   </v-col>
 
                   <!-- <v-col
@@ -132,20 +115,15 @@
                       class="purple-input"
                       :disabled="option===2?true:false"
                     />
-                  </v-col> -->
+                  </v-col>-->
                 </v-row>
-                <v-col
-                  cols="12"
-                  class="text-right"
-                >
+                <v-col cols="12" class="text-right">
                   <v-btn
                     v-if="option!==2"
                     color="success"
                     class="mr-0"
                     @click="printData(userData.person)"
-                  >
-                    {{ getTitleButton }}
-                  </v-btn>
+                  >{{ getTitleButton }}</v-btn>
                 </v-col>
               </v-container>
             </v-form>
@@ -154,10 +132,7 @@
             <v-form>
               <v-container class="py-0">
                 <v-row>
-                  <v-col
-                    cols="12"
-                    sm="12"
-                  >
+                  <v-col cols="12" sm="12">
                     <v-select
                       color="secondary"
                       item-color="secondary"
@@ -178,10 +153,7 @@
                           </v-list-item-content>
 
                           <v-scale-transition>
-                            <v-list-item-icon
-                              v-if="attrs.inputValue"
-                              class="my-3"
-                            >
+                            <v-list-item-icon v-if="attrs.inputValue" class="my-3">
                               <v-icon>mdi-check</v-icon>
                             </v-list-item-icon>
                           </v-scale-transition>
@@ -200,88 +172,86 @@
 </template>
 
 <script>
-  import i18n from '@/i18n'
-  import { editUsers, createUsers } from '@/api/modules'
-  import userjson from './user.json'
-  export default {
-    data: () => ({
-      userInput: userjson.inputs,
-      tabs: 0,
-      option: 0,
-      title: '',
-      userData: {
-        status: '',
-        status_str: '',
-        type: '',
-        person: {
-          id_number: '',
-          fullname: '',
-          email: '',
-          phone_number: '',
-        },
-      },
-      types: [i18n.t('users.doctor'), i18n.t('users.pharmacist')],
-      type: '',
-      role: [
-        'Fight Club',
-        'Godfather',
-        'Godfather II',
-        'Godfather III',
-        'Goodfellas',
-        'Pulp Fiction',
-        'Scarface',
-      ],
-    }),
-    computed: {
-      getTitle () {
-        if (this.option === 1) return i18n.t('users.create')
-        else if (this.option === 2) return i18n.t('users.show')
-        else if (this.option === 3) return i18n.t('users.edit')
-        else return i18n.t('users.title')
-      },
-      getTitleButton () {
-        if (this.option === 1) return i18n.t('crud.create')
-        else if (this.option === 2) return i18n.t('crud.show')
-        else if (this.option === 3) return i18n.t('crud.edit')
-        else return i18n.t('users.title')
-      },
+import i18n from "@/i18n";
+import { editUsers, createUsers } from "@/api/modules";
+import userjson from "./user.json";
+export default {
+  data: () => ({
+    userInput: userjson.inputs,
+    tabs: 0,
+    option: 0,
+    title: "",
+    selectData: ["Foo", "Bar", "Fizz", "Buzz"],
+    userData: {
+      status: "",
+      status_str: "",
+      type: "",
+      person: {
+       
+      }
     },
-    mounted () {
-      // console.log($t('users.title'))
-      this.initialize()
-      console.log(this.userInput)
+    types: [i18n.t("users.doctor"), i18n.t("users.pharmacist")],
+    type: "",
+    role: [
+      "Fight Club",
+      "Godfather",
+      "Godfather II",
+      "Godfather III",
+      "Goodfellas",
+      "Pulp Fiction",
+      "Scarface"
+    ]
+  }),
+  computed: {
+    getTitle() {
+      if (this.option === 1) return i18n.t("users.create");
+      else if (this.option === 2) return i18n.t("users.show");
+      else if (this.option === 3) return i18n.t("users.edit");
+      else return i18n.t("users.title");
     },
-    methods: {
-      printData (data) {
-        console.log(data)
-      },
-      initialize () {
-        this.option = this.$route.params.option
-        if (this.option === 3 || this.option === 2) {
-          this.userData = this.$route.params.userData
+    getTitleButton() {
+      if (this.option === 1) return i18n.t("crud.create");
+      else if (this.option === 2) return i18n.t("crud.show");
+      else if (this.option === 3) return i18n.t("crud.edit");
+      else return i18n.t("users.title");
+    }
+  },
+  mounted() {
+    // console.log($t('users.title'))
+    this.initialize();
+    console.log(this.userInput);
+  },
+  methods: {
+    printData(data) {
+      console.log(data);
+    },
+    initialize() {
+      this.option = this.$route.params.option;
+      if (this.option === 3 || this.option === 2) {
+        this.userData = this.$route.params.userData;
+      }
+    },
+    async submit() {
+      if (this.option === 1) {
+        let serviceResponse = await createUsers(this.userData);
+        if (serviceResponse.ok === 1) {
+          console.log(serviceResponse);
+        } else {
+          console.log(serviceResponse);
+          const params = { text: serviceResponse.message.text };
+          window.getApp.$emit("SHOW_ERROR", params);
         }
-      },
-      async submit () {
-        if (this.option === 1) {
-          let serviceResponse = await createUsers(this.userData)
-          if (serviceResponse.ok === 1) {
-            console.log(serviceResponse)
-          } else {
-            console.log(serviceResponse)
-            const params = { text: serviceResponse.message.text }
-            window.getApp.$emit('SHOW_ERROR', params)
-          }
-        } else if (this.option === 3) {
-          let serviceResponse = await editUsers(this.userData.id, this.userData)
-          if (serviceResponse.ok === 1) {
-            console.log(serviceResponse)
-          } else {
-            console.log(serviceResponse)
-            const params = { text: serviceResponse.message.text }
-            window.getApp.$emit('SHOW_ERROR', params)
-          }
+      } else if (this.option === 3) {
+        let serviceResponse = await editUsers(this.userData.id, this.userData);
+        if (serviceResponse.ok === 1) {
+          console.log(serviceResponse);
+        } else {
+          console.log(serviceResponse);
+          const params = { text: serviceResponse.message.text };
+          window.getApp.$emit("SHOW_ERROR", params);
         }
-      },
-    }, //
-  }
+      }
+    }
+  } //
+};
 </script>

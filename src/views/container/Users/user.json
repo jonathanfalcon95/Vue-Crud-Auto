@@ -1,71 +1,60 @@
 {
+    "title":"Users",
     "inputs":{
+        
         "user_email": {
-            "name": "email",
-            "type": "email",
-            "maxLength": "255",
+            "name": "Email",
+            "type": "select",
             "required": "true",
             "foreninKey": "false",
-            "dba_name": "user_email",
             "isTitle":"true"
         },
-        "user_name": {
-            "name": "name",
-            "type": "text",
-            "maxLength": "255",
-            "required": "false",
-            "foreninKey": "false",
-            "dba_name": "user_email",
-            "isTitle":"true"
-        },
+       
         "user_lastname": {
-            "name": "lastname",
+            "name": "Lastname",
             "type": "text",
-            "maxLength": "255",
             "required": "false",
             "foreninKey": "false",
-            "dba_name": "user_lastname",
-            "isTitle":"true"
+            "isTitle":"false"
         },
         "user_fullname": {
-            "name": "fullname",
+            "name": "Fullname",
             "type": "text",
-            "maxLength": "255",
             "required": "false",
             "foreninKey": "false",
-            "dba_name": "user_fullname",
             "isTitle":"true"
         },
         "user_phone": {
-            "name": "phone",
+            "name": "Phone",
             "type": "number",
-            "maxLength": "255",
             "required": "false",
             "foreninKey": "false",
-            "dba_name": "user_phone",
-            "isTitle":"false"
+            "isTitle":"true"
         },
 
         "id_role":{
-            "name": "role",
+            "name": "Role",
             "type": "number",
             "maxLength": "999",
             "required": "true",
             "foreninKey": "true",
-            "dba_name": "id_role",
             "isTitle":"false",
             "getEndpoint":"/role"
         },
         "id_gropus":{
             "name": "User Groups",
-            "type": "object",
-            "maxLength": "255",
+            "type": "select",
             "required": "true",
             "foreninKey": "false",
-            "manyToMany":"true",
-            "dba_name": "gropusXUser",
             "isTitle":"false",
             "getEndpoint":"/role"
+        },
+        "user_address": {
+            "name": "Direccion",
+            "type": "select",
+            "required": "true",
+            "foreninKey": "false",
+            "isTitle":"false"
         }
     },
     "options":{
