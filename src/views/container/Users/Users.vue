@@ -104,7 +104,7 @@
 <script>
   import { getUsers } from '@/api/modules'
   import i18n from '@/i18n'
-  import userjson from "./user.json";
+  import userjson from './user.json'
   export default {
     name: 'DashboardDataTables',
 
@@ -153,7 +153,7 @@
         },
       ],
       search: undefined,
-      searchLabel: "undefined",
+      searchLabel: 'undefined',
     }),
     async mounted () {
       // window.getApp.$emit("SHOW_ERROR", "34534535")
