@@ -5,7 +5,7 @@
         
         "user_email": {
             "name": "Email",
-            "type": "select",
+            "type": "email",
             "required": "true",
             "foreninKey": "false",
             "isTitle":"true"
@@ -26,8 +26,8 @@
             "isTitle":"true"
         },
         "user_phone": {
-            "name": "Phone",
-            "type": "number",
+            "name": "phone",
+            "type": "phone",
             "required": "false",
             "foreninKey": "false",
             "isTitle":"true"
