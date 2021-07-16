@@ -34,17 +34,17 @@
         class="elevation-1"
       >
         <template v-slot:item.actions="{ item }">
-          <v-btn outlined color="white" :key="1" @click="showUser(item)">
+          <v-btn outlined color="white" :key="1" @click="showUser(item.firm)">
             <v-img width="30px"  height="30px" :src="item.firm"></v-img>
           </v-btn>
         </template>
          <template v-slot:item.document="{ item }">
-          <v-btn outlined color="white" :key="1" @click="showUser(item)">
+          <v-btn outlined color="white" :key="1" @click="showUser(item.document)">
             <v-img width="30px"  height="30px" :src="item.document"></v-img>
           </v-btn>
         </template>
           <template v-slot:item.picture="{ item }">
-          <v-btn outlined color="white" :key="1" @click="showUser(item)">
+          <v-btn outlined color="white" :key="1" @click="showUser(item.pic)">
             <v-img width="30px" height="30px" :src="item.pic"></v-img>
           </v-btn>
         </template>
@@ -78,6 +78,33 @@
         </v-fab-transition> -->
       </v-card-text>
     </base-material-card>
+    <div class="text-center">
+    <v-dialog
+      v-model="dialog"
+      width="500"
+    >
+     
+
+      <v-card>
+       
+ <v-img width="auto"  :src="selImg"></v-img>
+      
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="primary"
+            text
+            @click="dialog = false"
+          >
+            Cerrar
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
   </v-container>
 </template>
 
@@ -94,6 +121,7 @@ export default {
   name: "DashboardDataTables",
 
   data: () => ({
+    selImg:"",
     hidden: false,
     title: "Visitas",
     headers: [
@@ -151,7 +179,8 @@ export default {
       },
     ],
     search: undefined,
-    searchLabel: "undefined",
+    searchLabel: "Buscar",
+    dialog:false
   }),
   async mounted() {
     // window.getApp.$emit("SHOW_ERROR", "34534535")
@@ -179,15 +208,18 @@ export default {
         },
       });
     },
+
     showUser(item) {
-      console.log(item);
-      this.$router.push({
-        name: "UsersFrom",
-        params: {
-          option: 2, // option 2 to show
-          userData: item,
-        },
-      });
+      this.dialog=true
+      this.selImg=item;
+      // console.log(item);
+      // this.$router.push({
+      //   name: "UsersFrom",
+      //   params: {
+      //     option: 2, // option 2 to show
+      //     userData: item,
+      //   },
+      // });
     },
     editUser(item) {
       console.log(item);
