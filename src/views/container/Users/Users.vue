@@ -35,28 +35,45 @@
       >
         <template v-slot:item.actions="{ item }">
           <v-btn outlined color="white" :key="1" @click="showUser(item.firm)">
-            <v-img width="30px"  height="30px" :src="item.firm"></v-img>
+            <v-img width="30px" height="30px" :src="item.firm"></v-img>
           </v-btn>
         </template>
-         <template v-slot:item.document="{ item }">
-          <v-btn outlined color="white" :key="1" @click="showUser(item.document)">
-            <v-img width="30px"  height="30px" :src="item.document"></v-img>
+        <template v-slot:item.document="{ item }">
+          <v-btn
+            outlined
+            color="white"
+            :key="1"
+            @click="showUser(item.document)"
+          >
+            <v-img width="30px" height="30px" :src="item.document"></v-img>
           </v-btn>
         </template>
-          <template v-slot:item.picture="{ item }">
+        <template v-slot:item.picture="{ item }">
           <v-btn outlined color="white" :key="1" @click="showUser(item.pic)">
             <v-img width="30px" height="30px" :src="item.pic"></v-img>
           </v-btn>
         </template>
-         <template v-slot:item.entry="{ item }">
-          <v-btn  small  outlined  color="primary" :key="1" @click="editUser(item)">
-             <v-icon>mdi-clock</v-icon>
+        <template v-slot:item.entry="{ item }">
+          <v-btn
+            small
+            outlined
+            color="primary"
+            :key="1"
+            @click="editUser(item)"
+          >
+            <v-icon>mdi-clock</v-icon>
             Registrar Entrada
           </v-btn>
         </template>
         <template v-slot:item.exit="{ item }">
-          <v-btn  small  outlined  color="primary" :key="1" @click="editUser(item)">
-             <v-icon>mdi-clock</v-icon>
+          <v-btn
+            small
+            outlined
+            color="primary"
+            :key="1"
+            @click="editUser(item)"
+          >
+            <v-icon>mdi-clock</v-icon>
             Registrar Salida
           </v-btn>
         </template>
@@ -79,32 +96,73 @@
       </v-card-text>
     </base-material-card>
     <div class="text-center">
-    <v-dialog
-      v-model="dialog"
-      width="500"
+      <v-dialog v-model="dialog" width="500">
+        <v-card>
+          <v-img width="auto" :src="selImg"></v-img>
+
+          <v-divider></v-divider>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" text @click="dialog = false"> Cerrar </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </div>
+
+
+        <v-dialog
+      v-model="dialog2"
+      persistent
+      max-width="600px"
     >
-     
-
+    
       <v-card>
-       
- <v-img width="auto"  :src="selImg"></v-img>
-      
-
-        <v-divider></v-divider>
-
+        <v-card-title>
+          <span class="text-h5">Registro</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container>
+            <v-row>
+            
+              <v-col cols="12">
+                <v-text-field
+                  label="Numero de Gafete"
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <v-text-field
+                  label="Numero de Gafete Exception"
+                  type="number"
+                  required
+                ></v-text-field>
+              </v-col>
+            
+             
+            </v-row>
+          </v-container>
+        
+        </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            color="primary"
+            color="blue darken-1"
             text
-            @click="dialog = false"
+            @click="dialog2 = false"
           >
             Cerrar
+          </v-btn>
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="dialog2 = false"
+          >
+            Guardar
           </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </div>
   </v-container>
 </template>
 
@@ -121,16 +179,16 @@ export default {
   name: "DashboardDataTables",
 
   data: () => ({
-    selImg:"",
+    selImg: "",
     hidden: false,
     title: "Visitas",
     headers: [
-       {
+      {
         sortable: false,
         text: "Fecha de entrada",
         value: "entry",
       },
-       {
+      {
         sortable: false,
         text: "Fecha de salida",
         value: "exit",
@@ -162,12 +220,12 @@ export default {
         text: "Firma",
         value: "actions",
       },
-       {
+      {
         sortable: false,
         text: "Identidad",
         value: "document",
       },
-       {
+      {
         sortable: false,
         text: "Foto Visita",
         value: "picture",
@@ -180,7 +238,8 @@ export default {
     ],
     search: undefined,
     searchLabel: "Buscar",
-    dialog:false
+    dialog: false,
+     dialog2: false,
   }),
   async mounted() {
     // window.getApp.$emit("SHOW_ERROR", "34534535")
@@ -210,8 +269,8 @@ export default {
     },
 
     showUser(item) {
-      this.dialog=true
-      this.selImg=item;
+      this.dialog = true;
+      this.selImg = item;
       // console.log(item);
       // this.$router.push({
       //   name: "UsersFrom",
@@ -222,14 +281,15 @@ export default {
       // });
     },
     editUser(item) {
-      console.log(item);
-      this.$router.push({
-        name: "UsersFrom",
-        params: {
-          option: 3, // option 3 to edit
-          userData: item,
-        },
-      });
+        this.dialog2 = true;
+      // console.log(item);
+      // this.$router.push({
+      //   name: "UsersFrom",
+      //   params: {
+      //     option: 3, // option 3 to edit
+      //     userData: item,
+      //   },
+      // });
     },
     deleteUser(item) {
       console.log(item);
