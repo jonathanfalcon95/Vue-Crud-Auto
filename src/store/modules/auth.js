@@ -50,20 +50,20 @@ const mutations = {
 
 const actions = {
    async loginAction ({ commit }, payload) {
-    let serviceResponse = await loginApi(payload)
-    console.log(serviceResponse)
-    if (serviceResponse.ok) {
-        commit(LOGIN_USER, serviceResponse.data)
-        localStorage.setItem('user_id', serviceResponse.data.id)
-        localStorage.setItem('email', serviceResponse.data.email)
-        localStorage.setItem('password', payload.password)
-        localStorage.setItem('token', serviceResponse.data.token)
+    // let serviceResponse = await loginApi(payload)
+    // console.log(serviceResponse)
+    // if (serviceResponse.ok) {
+    //     commit(LOGIN_USER, serviceResponse.data)
+    //     localStorage.setItem('user_id', serviceResponse.data.id)
+    //     localStorage.setItem('email', serviceResponse.data.email)
+    //     localStorage.setItem('password', payload.password)
+    //     localStorage.setItem('token', serviceResponse.data.token)
         router.push({ name: 'Dashboard' })
-    } else {
-      const params = { text: serviceResponse.message.text }
-      window.getApp.$emit('SHOW_ERROR', params)
-      router.push({ name: 'Login' })
-    }
+    // } else {
+    //   const params = { text: serviceResponse.message.text }
+    //   window.getApp.$emit('SHOW_ERROR', params)
+    //   router.push({ name: 'Login' })
+    // }
   },
   // logoutAction ({ commit, dispatch }) {
   //   localStorage.clear()

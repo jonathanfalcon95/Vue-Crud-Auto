@@ -12,7 +12,7 @@ export const editUsers = (userId, body) =>
   apiHttp('PUT', `${userSave}/${userId}`, body)
 
 export const getUsers = () =>
-  apiHttp('GET', `${userPath}`)
+  apiHttp('GET', `/Visit`)
 
 export const loginApi = ({ email, password }) => {
   console.log(email)

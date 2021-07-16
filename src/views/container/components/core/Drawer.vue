@@ -8,7 +8,7 @@
     :src="barImage"
     mobile-break-point="960"
     app
-    width="260"
+    width="300"
     v-bind="$attrs"
   >
     <template v-slot:img="props">
@@ -21,8 +21,12 @@
     <v-list-item two-line>
       <v-list-item-content>
         <v-list-item-title class="text-uppercase font-weight-regular display-2">
-          <span class="logo-mini">{{ $t("ct") }}</span>
-          <span class="logo-normal">{{ $t("tim") }}</span>
+         <div >
+            <v-img
+              :src="require(`@/assets/captura.png`)"
+              width="100%"
+            />
+          </div>
         </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
@@ -90,42 +94,15 @@
           title: 'dashboard',
           to: '/dashboard',
         },
-        {
-          group: '/pages',
-          icon: 'mdi-image',
-          title: 'pages',
-          children: [
-
-            {
-              title: 'login',
-              to: 'login',
-            },
-            {
-              title: 'register',
-              to: 'pricing',
-            },
-            {
-              title: 'lock',
-              to: 'lock',
-            },
-            {
-              title: 'user',
-              to: 'user',
-            },
-            {
-              title: 'error',
-              to: '404',
-            },
-          ],
-        },
+     
 
         {
           group: '/home/users',
           icon: 'mdi-account-tie',
-          title: 'users.title',
+          title: 'Gestion de Visitas',
           children: [
             {
-              title: 'users.title',
+              title: 'Visitas',
               to: 'users',
             },
           ],
