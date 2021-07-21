@@ -354,7 +354,9 @@ export default {
       console.log(item);
       console.log("Delete");
     },
- 
+   async export(){
+
+   }
   },
 };
 </script>
