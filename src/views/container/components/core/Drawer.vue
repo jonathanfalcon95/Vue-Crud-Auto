@@ -102,8 +102,12 @@
           title: 'Gestion de Visitas',
           children: [
             {
-              title: 'Visitas',
+              title: 'Visitas Programadas',
               to: 'users',
+            },
+             {
+              title: 'Visitas en curso',
+              to: 'visitas',
             },
           ],
         },

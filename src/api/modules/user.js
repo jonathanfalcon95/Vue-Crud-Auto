@@ -14,6 +14,19 @@ export const editUsers = (userId, body) =>
 export const getUsers = () =>
   apiHttp('GET', `/Visit`)
 
+  export const setEntry=(body)=>{
+    apiHttp('POST', `/Visit/Entry`, body)
+  }
+  export const setEtxit=(body)=>{
+    apiHttp('POST', `/Exit`, body)
+  }
+  export const DELETEV=(id)=>{
+    apiHttp('DELETE', `/Visit/${id}`)
+  }
+  export const sentEmail=(body)=>{
+    apiHttp('POST', `/Visit/SendEmail?email=${body.email}`, body)
+  }
+  
 export const loginApi = ({ email, password }) => {
   console.log(email)
   console.log(password)

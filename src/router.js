@@ -83,8 +83,8 @@ export default new Router({
         // Kitchen
         {
           name: 'Vendors',
-          path: 'vendors/vendors',
-          component: () => import('@/views/container/Vendors/Vendors'),
+          path: 'users/Visitas',
+          component: () => import('@/views/container/Visitas/Visitas'),
         },
 
       ],
