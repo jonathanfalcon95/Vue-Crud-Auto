@@ -43,7 +43,7 @@
     "axios": "^0.19.0",
     "vue-chartist": "^2.2.1",
     "vue-cli-plugin-eslint-config-vuetify": "latest",
-    "vue-cli-plugin-i18n": "^0.6.0",
+    "vue-cli-plugin-i18n": "^2.3.1",
     "vue-cli-plugin-vuetify": "^1.1.0",
     "vue-cli-plugin-vuetify-essentials": "latest",
     "vue-template-compiler": "^2.6.10",
